@@ -3,7 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const request = require('request');
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 3000;
 const riot = 'https://na1.api.riotgames.com/lol'
 const API_KEY = process.env.API_KEY;
 
