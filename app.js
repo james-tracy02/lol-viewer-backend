@@ -8,7 +8,7 @@ const riot = 'https://na1.api.riotgames.com/lol'
 const API_KEY = process.env.API_KEY;
 
 const UserRepository = require("./users.js");
-const Users = new UsersRepository();
+const Users = new UserRepository();
 
 app.use(cors());
 
