@@ -24,8 +24,14 @@ app.get('/matches/:id', (req, res) => getMatchById(req, res));
 app.post('/users', (req, res) => registerUser(req, res));
 app.get('/users', (req, res) => getUsers(req, res));
 app.get('/users/:name', (req, res) => getUserByName(req, res));
+app.post('login', (req, res) => login(req, res));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+function login(req, res) {
+  Users.login(username, password)
+  .then((status) => res.send(status));
+}
 
 function getUserByName(req, res) {
   const username = req.params.name;
