@@ -23,8 +23,15 @@ app.get('/matches/:id', (req, res) => getMatchById(req, res));
 
 app.post('/users', (req, res) => registerUser(req, res));
 app.get('/users', (req, res) => getUsers(req, res));
+app.get('/users/:name', (req, res) => getUserByName(req, res));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+function getUserByName(req, res) {
+  const username = req.params.name;
+  Users.getUserByName(username)
+  .then((data) => res.send(data));
+}
 
 function getUsers(req, res) {
   Users.getUsers()

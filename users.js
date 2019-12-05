@@ -24,6 +24,12 @@ class UsersRepository {
     const users = db.collection('users');
     return users.find().toArray();
   }
+
+  getUserByName(username) {
+    const db = mongoClient.db();
+    const users = db.collection('users');
+    return users.find({username: username});
+  }
 }
 
 module.exports = UsersRepository;
