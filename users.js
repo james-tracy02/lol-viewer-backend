@@ -22,7 +22,7 @@ class UsersRepository {
   getUsers() {
     const db = mongoClient.db();
     const users = db.collection('users');
-    return users.find();
+    return users.find().toArray();
   }
 }
 
