@@ -31,8 +31,8 @@ function getUsers(req, res) {
 
 function registerUser(req, res) {
   const user = req.body;
-  Users.registerUser(user)
-  .then((status) => res.send(status));
+  Users.registerUser(user);
+  res.send("ok");
 }
 
 function getSummonerByName(req, res) {
