@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 const request = require('request');
@@ -11,6 +12,7 @@ const UserRepository = require("./users.js");
 const Users = new UserRepository();
 
 app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/summoners/:name', (req, res) => getSummonerByName(req, res));
 app.get('/spectator/featured', (req, res) => getFeaturedSpectate(req, res));
@@ -31,8 +33,8 @@ function getUsers(req, res) {
 
 function registerUser(req, res) {
   const user = req.body;
-  Users.registerUser(user);
-  res.send("ok");
+  Users.registerUser(user)
+  .then((status) => res.send(status));
 }
 
 function getSummonerByName(req, res) {

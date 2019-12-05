@@ -16,7 +16,7 @@ class UsersRepository {
   registerUser(user) {
     const db = mongoClient.db();
     const users = db.collection('users');
-    users.insertOne(user);
+    return users.insertOne(user);
   }
 
   getUsers() {
