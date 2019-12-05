@@ -28,7 +28,7 @@ class UsersRepository {
   getUserByName(username) {
     const db = mongoClient.db();
     const users = db.collection('users');
-    return users.find({username: username});
+    return users.findOne({username: username});
   }
 }
 
