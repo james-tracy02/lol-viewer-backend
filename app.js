@@ -29,6 +29,8 @@ app.post('/login', (req, res) => login(req, res));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 function login(req, res) {
+  const username = req.body.username;
+  const password = req.body.password;
   Users.login(username, password)
   .then((status) => res.send(status));
 }
