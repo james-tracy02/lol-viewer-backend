@@ -13,6 +13,15 @@ class UsersRepository {
     });
   }
 
+  login(username, password) {
+    const db = mongoClient.db();
+    const users = db.collection('users');
+    return users.find({
+        username: username,
+        password: password,
+      }).toArray();
+  }
+
   registerUser(user) {
     const db = mongoClient.db();
     const users = db.collection('users');
