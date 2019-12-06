@@ -18,9 +18,8 @@ class UsersRepository {
     const users = db.collection('users');
     return users.findOne({
       username: username
-    }).then((user) => {
-      console.log(user);
-      if(user) {
+    }).then((oldUser) => {
+      if(oldUser) {
         users.replaceOne({username: username}, user);
       }
     }).then(() => "ok");
