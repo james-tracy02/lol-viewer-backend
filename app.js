@@ -25,8 +25,16 @@ app.post('/users', (req, res) => registerUser(req, res));
 app.get('/users', (req, res) => getUsers(req, res));
 app.get('/users/:name', (req, res) => getUserByName(req, res));
 app.post('/login', (req, res) => login(req, res));
+app.put('/users/:name', (req, res) => updateUser(req, res));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+function updateUser(req, res) {
+  const username = req.params.name;
+  const user = req.body;
+  Users.updateUser(username, user)
+  .then((status) => res.send(status));
+}
 
 function login(req, res) {
   const username = req.body.username;

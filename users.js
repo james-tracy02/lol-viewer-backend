@@ -13,6 +13,19 @@ class UsersRepository {
     });
   }
 
+  updateUser(username, user) {
+    const db = mongoClient.db();
+    const users = db.collection('users');
+    return users.findOne({
+      username: username
+    }).then((user) => {
+      console.log(user);
+      if(user) {
+        users.replaceOne({username: username}, user);
+      }
+    }).then(() => "ok");
+  }
+
   login(username, password) {
     const db = mongoClient.db();
     const users = db.collection('users');
