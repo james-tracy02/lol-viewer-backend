@@ -42,7 +42,7 @@ function getCommentsForMatch(req, res) {
 
 function getCommentsForUser(req, res) {
   const username = req.params.name;
-  Comments.getCommentsForMatch(username)
+  Comments.getCommentsForUser(username)
   .then((data) => res.send(data));
 }
 
