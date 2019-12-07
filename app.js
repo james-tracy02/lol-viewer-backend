@@ -40,9 +40,9 @@ function getCommentsForMatch(req, res) {
   .then((data) => res.send(data));
 }
 
-function getCommentsForMatch(req, res) {
-  const matchId = req.params.id;
-  Comments.getCommentsForMatch(matchId)
+function getCommentsForUser(req, res) {
+  const username = req.params.name;
+  Comments.getCommentsForMatch(username)
   .then((data) => res.send(data));
 }
 

@@ -25,10 +25,10 @@ class CommentsRepository {
     return comments.find({matchId: matchId}).toArray();
   }
 
-  getCommentsForUser(userId) {
+  getCommentsForUser(username) {
     const db = mongoClient.db();
     const comments = db.collection('comments');
-    return comments.find({userId: userId}).toArray();
+    return comments.find({username: username}).toArray();
   }
 
   login(username, password) {
