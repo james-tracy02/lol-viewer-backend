@@ -13,7 +13,7 @@ class CommentsRepository {
     });
   }
 
-  getComemnts() {
+  getComments() {
     const db = mongoClient.db();
     const comments = db.collection('comments');
     return comments.find().toArray();
