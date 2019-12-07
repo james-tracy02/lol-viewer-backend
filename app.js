@@ -10,8 +10,10 @@ const API_KEY = process.env.API_KEY;
 
 const UserRepository = require("./users.js");
 const CommentsRepository = require("./comments.js");
+const TeamsRepository = require("./teams.js");
 const Users = new UserRepository();
 const Comments = new CommentsRepository();
+const Teams = new TeamsRepository();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -28,12 +30,48 @@ app.get('/users', (req, res) => getUsers(req, res));
 app.get('/users/:name', (req, res) => getUserByName(req, res));
 app.post('/login', (req, res) => login(req, res));
 app.put('/users/:name', (req, res) => updateUser(req, res));
+
 app.post('/comments', (req, res) => createComment(req, res));
 app.get('/matches/:id/comments', (req, res) => getCommentsForMatch(req, res));
 app.get('/users/:name/comments', (req, res) => getCommentsForUser(req, res));
 app.get('/comments', (req, res) => getComments(req, res));
 
+app.post('/teams', (req, res) => createTeam(req, res));
+app.get('/teams', (req, res) => getTeams(req, res));
+app.get('/teams/:name', (req, res) => getTeamByName(req, res));
+app.put('/teams/:name', (req, res) => updateTeam(req, res));
+app.delete('/teams/:name', (req, res) => deleteTeam(req, res));
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+function createTeam(req, res) {
+  const team = req.body;
+  Teams.createTeam(team)
+  .then((status) => res.send('ok'));
+}
+
+function getTeams(req, res) {
+  Teams.getTeams()
+  .then((data) => res.send(data));
+}
+
+function getTeamByName(req, res) {
+  const name = req.params.name;
+  Teams.getTeamByName(name)
+  .then((data) => res.send(data));
+}
+
+function updateTeam(req, res) {
+  const team = req.body;
+  Teams.updateTeam(team)
+  .then((status) => res.send('ok'));
+}
+
+function deleteTeam(req, res) {
+  const name = req.params.name;
+  Teams.deleteTeam(name)
+  .then((status) => res.send('ok'));
+}
 
 function getComments(req, res) {
   Comments.getComments()
