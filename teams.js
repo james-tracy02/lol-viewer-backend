@@ -21,25 +21,25 @@ class TeamsRepository {
 
   createTeam(team) {
     const db = mongoClient.db();
-    const teams = db.collection('team');
+    const teams = db.collection('teams');
     return teams.insertOne(team);
   }
 
   getTeamByName(teamName) {
     const db = mongoClient.db();
-    const teams = db.collection('team');
+    const teams = db.collection('teams');
     return teams.findOne({name: teamName});
   }
 
   updateTeam(team) {
     const db = mongoClient.db();
-    const teams = db.collection('team');
+    const teams = db.collection('teams');
     return teams.replaceOne({name: team.name}, team);
   }
 
   deleteTeam(teamName) {
     const db = mongoClient.db();
-    const teams = db.collection('team');
+    const teams = db.collection('teams');
     return teams.deleteOne({name: teamName});
   }
 }
