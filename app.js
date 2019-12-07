@@ -9,7 +9,9 @@ const riot = 'https://na1.api.riotgames.com/lol'
 const API_KEY = process.env.API_KEY;
 
 const UserRepository = require("./users.js");
+const CommentsRepository = require("./comments.js");
 const Users = new UserRepository();
+const Comments = new CommentsRepository();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -26,8 +28,29 @@ app.get('/users', (req, res) => getUsers(req, res));
 app.get('/users/:name', (req, res) => getUserByName(req, res));
 app.post('/login', (req, res) => login(req, res));
 app.put('/users/:name', (req, res) => updateUser(req, res));
+app.post('/comments', (req, res) => createComment(req, res));
+app.get('/matches/:id/comments', (req, res) => getCommentsForMatch(req, res));
+app.get('/users/:name/comments', (req, res) => getCommentsForUser(req, res));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+function getCommentsForMatch(req, res) {
+  const matchId = req.params.id;
+  Comments.getCommentsForMatch(matchId)
+  .then((data) => res.send(data));
+}
+
+function getCommentsForMatch(req, res) {
+  const matchId = req.params.id;
+  Comments.getCommentsForMatch(matchId)
+  .then((data) => res.send(data));
+}
+
+function createComment(req, res) {
+  const comment = req.body;
+  Comments.createComment(comment)
+  .then((status) => res.send('ok'));
+}
 
 function updateUser(req, res) {
   const username = req.params.name;
