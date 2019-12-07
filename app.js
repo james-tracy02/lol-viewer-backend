@@ -31,8 +31,14 @@ app.put('/users/:name', (req, res) => updateUser(req, res));
 app.post('/comments', (req, res) => createComment(req, res));
 app.get('/matches/:id/comments', (req, res) => getCommentsForMatch(req, res));
 app.get('/users/:name/comments', (req, res) => getCommentsForUser(req, res));
+app.get('/comments', (req, res) => getComments(req, res));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+function getComments(req, res) {
+  Comments.getComments()
+  .then((data) => res.send(data));
+}
 
 function getCommentsForMatch(req, res) {
   const matchId = req.params.id;
