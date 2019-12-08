@@ -59,7 +59,7 @@ function createMatch(req, res) {
 
 function getMatchesForTeam(req, res) {
   const teamname = req.params.name;
-  Teams.getTeamByName(teamname)
+  Matches.getMatchesForTeam(teamname)
   .then((data) => res.send(data));
 }
 
