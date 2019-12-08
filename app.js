@@ -60,8 +60,6 @@ function createMatch(req, res) {
 function getMatchesForTeam(req, res) {
   const teamname = req.params.name;
   Teams.getTeamByName(teamname)
-  .then((data) => data.json())
-  .then((team) => Matches.getManyMatchesById(team.matches))
   .then((data) => res.send(data));
 }
 

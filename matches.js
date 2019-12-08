@@ -25,10 +25,10 @@ class MatchesRepository {
     return match.insertOne(match);
   }
 
-  getManyMatchesById(ids) {
+  getMatchesForTeam(teamname) {
     const db = mongoClient.db();
     const teams = db.collection('matches');
-    return teams.find({_id: {$in: ids}}).toArray();
+    return teams.find({team: teamname}).toArray();
   }
 
   updateMatch(match) {
