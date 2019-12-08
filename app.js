@@ -11,9 +11,11 @@ const API_KEY = process.env.API_KEY;
 const UserRepository = require("./users.js");
 const CommentsRepository = require("./comments.js");
 const TeamsRepository = require("./teams.js");
+const MatchesRepository = require("./matches.js");
 const Users = new UserRepository();
 const Comments = new CommentsRepository();
 const Teams = new TeamsRepository();
+const Matches = new MatchesRepository();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -42,7 +44,38 @@ app.get('/teams/:name', (req, res) => getTeamByName(req, res));
 app.put('/teams/:name', (req, res) => updateTeam(req, res));
 app.delete('/teams/:name', (req, res) => deleteTeam(req, res));
 
+app.post('/matches', (req, res) => createMatch(req, res));
+app.get('/teams/:name/matches', (req, res) => getMatchesForTeam(req, res));
+app.put('/matches/:id', (req, res) => updateMatch(req, res));
+app.delete('/matches/:id', (req, res) => deleteMatch(req, res));
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+function createMatch(req, res) {
+  const match = req.body;
+  Matches.createMatch(match)
+  .then((status) => res.send('ok'));
+}
+
+function getMatchesForTeam(req, res) {
+  const teamname = req.params.name;
+  Teams.getTeamByName(teamname)
+  .then((data) => data.json())
+  .then((team) => Matches.getManyMatchesById(team.matches))
+  .then((data) => res.send(data));
+}
+
+function updateMatch(req, res) {
+  const match = req.body;
+  Matches.updateMatch(match)
+  .then((status) => res.send('ok'));
+}
+
+function deleteMatch(req, res) {
+  const name = req.params.id;
+  Match.deleteMatch(id)
+  .then((status) => res.send('ok'));
+}
 
 function createTeam(req, res) {
   const team = req.body;
