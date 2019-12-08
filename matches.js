@@ -19,7 +19,7 @@ class MatchesRepository {
     return teams.find().toArray();
   }
 
-  createMatches(match) {
+  createMatch(match) {
     const db = mongoClient.db();
     const teams = db.collection('matches');
     return match.insertOne(match);
