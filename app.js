@@ -71,7 +71,7 @@ function updateMatch(req, res) {
 
 function deleteMatch(req, res) {
   const name = req.params.id;
-  Match.deleteMatch(id)
+  Matches.deleteMatch(id)
   .then((status) => res.send('ok'));
 }
 
