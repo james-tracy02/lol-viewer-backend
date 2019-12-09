@@ -70,7 +70,7 @@ function updateMatch(req, res) {
 }
 
 function deleteMatch(req, res) {
-  const name = req.params.id;
+  const id = req.params.id;
   Matches.deleteMatch(id)
   .then((status) => res.send('ok'));
 }
