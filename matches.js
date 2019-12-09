@@ -34,7 +34,7 @@ class MatchesRepository {
   deleteMatch(matchId) {
     const db = mongoClient.db();
     const matches = db.collection('matches');
-    return matches.deleteOne({_id: matchId});
+    return matches.deleteOne({_id: new ObjectId(matchId)});
   }
 }
 
